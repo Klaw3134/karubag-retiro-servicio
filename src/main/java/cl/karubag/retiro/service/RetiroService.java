@@ -4,6 +4,7 @@ import cl.karubag.retiro.dto.RetiroDTO;
 import cl.karubag.retiro.model.EstadoRetiro;
 import cl.karubag.retiro.model.Retiro;
 import cl.karubag.retiro.repository.RetiroRepository;
+import cl.karubag.retiro.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
@@ -40,7 +41,7 @@ public class RetiroService {
 
     public RetiroDTO obtenerPorId(Long id) {
         Retiro retiro = retiroRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Retiro no encontrado con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Retiro no encontrado con id: " + id));
         return toDTO(retiro);
     }
 
@@ -50,7 +51,7 @@ public class RetiroService {
 
     public RetiroDTO actualizar(Long id, RetiroDTO dto) {
         Retiro retiro = retiroRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Retiro no encontrado con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Retiro no encontrado con id: " + id));
         retiro.setClienteId(dto.getClienteId());
         retiro.setRutaId(dto.getRutaId());
         retiro.setFechaProgramada(dto.getFechaProgramada());
@@ -62,7 +63,7 @@ public class RetiroService {
 
     public RetiroDTO marcarFallido(Long id, String observacion) {
         Retiro retiro = retiroRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Retiro no encontrado con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Retiro no encontrado con id: " + id));
         retiro.setEstado(EstadoRetiro.FALLIDO);
         retiro.setObservacion(observacion);
         return toDTO(retiroRepository.save(retiro));
@@ -70,7 +71,7 @@ public class RetiroService {
 
     public RetiroDTO marcarAusente(Long id, String observacion) {
         Retiro retiro = retiroRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Retiro no encontrado con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Retiro no encontrado con id: " + id));
         retiro.setEstado(EstadoRetiro.AUSENTE);
         retiro.setObservacion(observacion);
         return toDTO(retiroRepository.save(retiro));
@@ -78,7 +79,7 @@ public class RetiroService {
 
     public RetiroDTO completar(Long id) {
         Retiro retiro = retiroRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Retiro no encontrado con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Retiro no encontrado con id: " + id));
         retiro.setEstado(EstadoRetiro.COMPLETADO);
         retiro.setFechaRealizada(LocalDate.now());
         return toDTO(retiroRepository.save(retiro));
