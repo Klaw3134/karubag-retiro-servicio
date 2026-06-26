@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@Tag(name = "Retiros", description = "Gestión de retiros de materiales Karübag")
+@Tag(name = "Retiros", description = "Gestion de retiros de materiales Karübag")
 @RestController
 @RequestMapping("/api/retiros")
 public class RetiroController {
@@ -34,14 +34,14 @@ public class RetiroController {
         return ResponseEntity.ok(retiroService.listarTodos());
     }
 
-    @Operation(summary = "Listar por cliente", description = "Retorna retiros de un cliente específico")
+    @Operation(summary = "Listar por cliente", description = "Retorna retiros de un cliente especifico")
     @ApiResponse(responseCode = "200", description = "Lista de retiros del cliente")
     @GetMapping("/cliente/{clienteId}")
     public ResponseEntity<List<RetiroDTO>> listarPorCliente(@PathVariable Long clienteId) {
         return ResponseEntity.ok(retiroService.listarPorCliente(clienteId));
     }
 
-    @Operation(summary = "Listar por ruta", description = "Retorna retiros de una ruta específica")
+    @Operation(summary = "Listar por ruta", description = "Retorna retiros de una ruta especifica")
     @ApiResponse(responseCode = "200", description = "Lista de retiros por ruta")
     @GetMapping("/ruta/{rutaId}")
     public ResponseEntity<List<RetiroDTO>> listarPorRuta(@PathVariable Long rutaId) {
@@ -89,7 +89,7 @@ public class RetiroController {
         return ResponseEntity.ok(retiroService.actualizar(id, dto));
     }
 
-    @Operation(summary = "Completar retiro", description = "Marca el retiro como completado y registra fecha de realización")
+    @Operation(summary = "Completar retiro", description = "Marca el retiro como completado y registra fecha de realizacion")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Retiro completado exitosamente"),
         @ApiResponse(responseCode = "404", description = "Retiro no encontrado")

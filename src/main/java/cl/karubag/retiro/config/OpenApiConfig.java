@@ -11,6 +11,6 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Retiro Servicio API")
                         .version("1.0")
-                        .description("API de gestión de retiros Karübag"));
+                        .description("API de gestion de retiros Karübag"));
     }
 }
