@@ -10,7 +10,7 @@ public class ClienteClient {
 
     public ClienteClient(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder
-                .baseUrl("http://localhost:8084")
+                .baseUrl("https://karubag-cliente-servicio.onrender.com")
                 .build();
     }
 
